@@ -1,0 +1,19 @@
+{
+  "Routes": [ //路由配置（注16.1版本将ReRoutes换成Routes）
+    {
+      "DownstreamPathTemplate": "/{url}",    
+      "DownstreamScheme": "http", 
+      "DownstreamHostAndPorts": [ 
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{url}",     
+      "UpstreamHttpMethod": [ "GET" ,"POST"]  
+    }
+  ],
+  "GlobalConfiguration": { //全局配置     
+    //"BaseUrl": "https://localhost:44313" //网关对外地址   
+    }
+  }

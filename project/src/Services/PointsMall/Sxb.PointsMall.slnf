@@ -1,0 +1,20 @@
+{
+  "solution": {
+    "path": "..\\..\\..\\Sxb.Product.sln",
+    "projects": [
+      "src\\ApiGateways\\Sxb.ApiGateway\\Sxb.ApiGateway.csproj",
+      "src\\Services\\PointsMall\\Sxb.PointsMall.API\\Sxb.PointsMall.API.csproj",
+      "src\\Services\\PointsMall\\Sxb.PointsMall.Domain\\Sxb.PointsMall.Domain.csproj",
+      "src\\Services\\PointsMall\\Sxb.PointsMall.FuntionTest\\Sxb.PointsMall.FuntionTest.csproj",
+      "src\\Services\\PointsMall\\Sxb.PointsMall.Infrastructure\\Sxb.PointsMall.Infrastructure.csproj",
+      "src\\Services\\PointsMall\\Sxb.PointsMall.UnitTest\\Sxb.PointsMall.UnitTest.csproj",
+      "src\\Shared\\Sxb.Domain.Abstractions\\Sxb.Domain.Abstractions.csproj",
+      "src\\Shared\\Sxb.Infrastructure.Core\\Sxb.Infrastructure.Core.csproj",
+      "src\\Tools\\Sxb.Framework.AspNetCoreHelper\\Sxb.Framework.AspNetCoreHelper.csproj",
+      "src\\Tools\\Sxb.Framework.Cache.Redis\\Sxb.Framework.Cache.RedisProfiler\\Sxb.Framework.Cache.RedisProfiler.csproj",
+      "src\\Tools\\Sxb.Framework.Cache.Redis\\src\\Sxb.Framework.Cache.Redis.csproj",
+      "src\\Tools\\Sxb.Framework.Foundation\\Sxb.Framework.Foundation.csproj",
+      "src\\Tools\\Sxb.Framework.HttpContextLog\\Sxb.Framework.HttpContextLog.csproj"
+    ]
+  }
+}

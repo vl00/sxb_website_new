@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-article-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-article-api-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-article-api-dev
+  template:
+    metadata:
+      labels:
+        app: sxb-article-api-dev
+    spec:
+      containers:
+      - name: sxb-article-api-dev
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-article-api:dev"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/app/appsettings.Development.json"
+            name: appsettings
+            subPath: appsettings.Development.json
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_HOSTINGSTARTUPASSEMBLIES
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_hostingStartup
+          - name: SkyWalking__Transport__gRPC__Servers
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_servers
+          - name: USE_Forwarded_Headers
+            value: "true"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: appsettings
+          configMap:
+              name: sxb-article-api-dev-config
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-article-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-article-api-dev
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-article-api-dev

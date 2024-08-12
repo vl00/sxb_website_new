@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>211f6916-ce6c-47ba-b0e7-fe908c96a140</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Commands\Models\" />
+    <Folder Include="Grpc\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" Version="5.0.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="5.0.3" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="5.1.1" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="5.1.1" />
+    <PackageReference Include="Exceptionless.AspNetCore" Version="4.6.2" />
+    <PackageReference Include="Exceptionless.Extensions.Logging" Version="4.6.2" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.38.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.13.2" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="4.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
+    <PackageReference Include="Serilog.Sinks.Fluentd" Version="0.4.0" />
+    <PackageReference Include="SkyAPM.Agent.AspNetCore" Version="1.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.AspNetCoreHelper\Sxb.Framework.AspNetCoreHelper.csproj" />
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.Cache.Redis\Sxb.Framework.Cache.RedisProfiler\Sxb.Framework.Cache.RedisProfiler.csproj" />
+    <ProjectReference Include="..\Sxb.User.Common\Sxb.User.Common.csproj" />
+    <ProjectReference Include="..\Sxb.User.Infrastructure\Sxb.User.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sxb.User.Query.SQL\Sxb.User.Query.SQL.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

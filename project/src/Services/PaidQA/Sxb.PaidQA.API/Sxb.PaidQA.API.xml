@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sxb.PaidQA.API</name>
+    </assembly>
+    <members>
+        <member name="M:Sxb.PaidQA.API.Application.Query.ITalentQuery.GetDetail(System.Guid)">
+            <summary>
+            获取达人详情
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.PaidQA.API.Application.Query.ITalentQuery.RandomByGrade(System.Int32,System.Boolean)">
+            <summary>
+            随机一个学段达人
+            </summary>
+            <param name="grade">学段</param>
+            <param name="isInternal">是否内部达人</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.PaidQA.API.Application.Query.ITalentQuery.GetExtensionTalentUserIDAsync(System.Guid)">
+            <summary>
+            获取学部绑定的达人用户ID
+            </summary>
+            <param name="eid">学部ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.PaidQA.API.Controllers.TalentController.GetByUserID(System.Guid)">
+            <summary>
+            获取付费问答达人详情
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="P:Sxb.PaidQA.API.RequestContact.Talent.RandomByGradeRequest.Grade">
+            <summary>
+            学段
+            </summary>
+        </member>
+        <member name="P:Sxb.PaidQA.API.RequestContact.Talent.RandomByGradeRequest.IsInteral">
+            <summary>
+            是否内部达人
+            </summary>
+        </member>
+        <member name="P:Sxb.PaidQA.API.RequestContact.Talent.RandomByGradeRequest.EID">
+            <summary>
+            学部ID
+            </summary>
+        </member>
+    </members>
+</doc>

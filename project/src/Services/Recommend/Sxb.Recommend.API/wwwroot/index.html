@@ -1,0 +1,68 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>V1</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="js/config.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <ul>
+            <li><a href="./mapfeature.html">修改特性分值</a></li>
+            <li><a href="javascript:;" v-on:click="syncSchools">同步学校数据源</a></li>
+            <li><a href="javascript:;" v-on:click="syncArticles">同步文章数据源</a></li>
+            <li><a href="./schoolredirect.html">模拟学校跳转</a></li>
+            <li><a href="./articleRedirect.html">模拟文章跳转</a></li>
+            <li><a href="./schoolreommends.html">查看学校推荐</a></li>
+            <li><a href="./articlereommends.html">查看文章推荐</a></li>
+        </ul>
+        <p>{{sysinfo}}</p>
+        <button type="button" v-on:click="refreshSysInfo">刷新</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mounted: function () {
+                this.getSysInfo()
+            },
+            data: {
+                message: '',
+                sysinfo:''
+            },
+            methods: {
+                syncSchools: function () {
+                    var _this = this;
+                    _this.message = '学校数据源同步中，请稍后。'
+                    $.get(config.host + '/api/recommend/SyncSchoolSourse', function (data) {
+                        _this.message = '学校数据源同步完成!'
+                    });
+                },
+                syncArticles: function () {
+                    var _this = this;
+                    _this.message = '文章数据源同步中，请稍后。'
+                    $.get(config.host + '/api/recommend/SyncArticleSourse', function (data) {
+                        _this.message = '文章数据源同步完成!'
+                    });
+                },
+                getSysInfo: function () {
+                    var _this = this;
+                    $.get(config.host + '/api/recommend/DataInfo', function (data) {
+                        var items = []
+                        items.push("学校总数：" + data.data.schoolTotal);
+                        items.push("文章总数：" + data.data.articleTotal);
+                        items.push("随机跑一所学校耗时：" + data.data.schoolRandomMilliseconds + '毫秒');
+                        items.push("随机跑一篇文章耗时：" + data.data.articleRandomMilliseconds + '毫秒');
+                        _this.sysinfo = items.join('；');
+                        
+                    });
+                },
+                refreshSysInfo: function () {
+                    this.sysinfo = '请稍等...'
+                    this.getSysInfo()
+                }
+            }
+        })
+    </script>
+</body>
+</html>

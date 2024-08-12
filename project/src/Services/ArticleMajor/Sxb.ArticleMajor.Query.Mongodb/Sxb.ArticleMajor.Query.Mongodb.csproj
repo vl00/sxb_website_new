@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ProductManagement.Framework.MongoDb" Version="0.0.6-beta.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sxb.ArticleMajor.Common\Sxb.ArticleMajor.Common.csproj" />
+    <ProjectReference Include="..\Sxb.ArticleMajor.Query.SQL\Sxb.ArticleMajor.Query.SQL.csproj" />
+  </ItemGroup>
+
+</Project>

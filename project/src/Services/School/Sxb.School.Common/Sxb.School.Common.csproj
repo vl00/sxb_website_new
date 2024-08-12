@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Kogel.Dapper.Extension" Version="3.2.2.3" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.AspNetCoreHelper\Sxb.Framework.AspNetCoreHelper.csproj" />
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.Foundation\Sxb.Framework.Foundation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="OtherAPIClient\WxWork\Model\" />
+  </ItemGroup>
+
+</Project>

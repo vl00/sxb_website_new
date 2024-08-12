@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-pointsmall-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-pointsmall-api-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-pointsmall-api-dev
+  template:
+    metadata:
+      labels:
+        app: sxb-pointsmall-api-dev
+    spec:
+      volumes:
+        - name: appsettings
+          configMap:
+            name: sxb-pointsmall-api-dev-config
+            defaultMode: 420
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+      containers:
+      - name: sxb-pointsmall-api-dev
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-pointsmall-api:dev"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/app/appsettings.Development.json"
+            name: appsettings
+            subPath: appsettings.Development.json
+          - name: host-time
+            readOnly: true
+            mountPath: /etc/localtime 
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      terminationGracePeriodSeconds: 10
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-pointsmall-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-pointsmall-api-dev
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-pointsmall-api-dev

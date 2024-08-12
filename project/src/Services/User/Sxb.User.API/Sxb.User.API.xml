@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sxb.User.API</name>
+    </assembly>
+    <members>
+        <member name="T:Sxb.User.API.Application.IntegrationEvents.SubscriberService">
+            <summary>
+            集成事件订阅
+            </summary>
+        </member>
+        <member name="M:Sxb.User.API.Application.Query.IMyTalentQueries.GetByUserID(System.Guid)">
+            <summary>
+            根据UserInfo.ID获取达人信息
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.User.API.Controllers.TalentController.InviteTalentByCode(Sxb.User.API.Application.Commands.TalentInviteByCodeCommand)">
+            <summary>
+            通过达人码成为达人
+            </summary>
+            <param name="cmd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.User.API.Controllers.TalentController.ApplyTalent(Sxb.User.API.Application.Commands.TalentApplyCommand)">
+            <summary>
+            申请达人
+            </summary>
+            <param name="cmd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.User.API.Controllers.TalentController.GetTalent(System.Guid)">
+            <summary>
+            查询达人
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.User.API.Controllers.TalentController.GetExtensionTalentUserID(Sxb.User.API.RequestContract.Talent.GetExtensionTalentUserIDRequest)">
+            <summary>
+            获取学部绑定的付费达人用户ID
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Sxb.User.API.RequestContract.Talent.GetExtensionTalentUserIDRequest.EID">
+            <summary>
+            学部ID
+            </summary>
+        </member>
+        <member name="P:Sxb.User.API.RequestContract.VerifyCode.VerifyRndCodeRequest.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:Sxb.User.API.RequestContract.VerifyCode.VerifyRndCodeRequest.NationCode">
+            <summary>
+            国家区号
+            </summary>
+        </member>
+        <member name="P:Sxb.User.API.RequestContract.VerifyCode.VerifyRndCodeRequest.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:Sxb.User.API.RequestContract.VerifyCode.VerifyRndCodeRequest.CodeType">
+            <summary>
+            验证码类型
+            </summary>
+        </member>
+    </members>
+</doc>

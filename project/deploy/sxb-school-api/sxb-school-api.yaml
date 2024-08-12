@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-school-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-school-api-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-school-api-dev
+  template:
+    metadata:
+      labels:
+        app: sxb-school-api-dev
+    spec:
+      containers:
+      - name: sxb-school-api-dev
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-school-api:dev"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/app/appsettings.Development.json"
+            name: appsettings
+            subPath: appsettings.Development.json
+          - name: host-time
+            readOnly: true
+            mountPath: /etc/localtime 
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_HOSTINGSTARTUPASSEMBLIES
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_hostingStartup
+          - name: SkyWalking__Transport__gRPC__Servers
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_servers
+          - name: USE_Forwarded_Headers
+            value: "true"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
+      livenessProbe:
+            httpGet:
+              path: /live
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 3
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
+              scheme: HTTP
+            timeoutSeconds: 2
+            periodSeconds: 3
+            successThreshold: 2
+            failureThreshold: 3
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: appsettings
+          configMap:
+              name: sxb-school-api-dev-config
+        - name: host-time
+          hostPath:
+              path: /etc/localtime
+              type: ''
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-school-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-school-api-dev
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-school-api-dev

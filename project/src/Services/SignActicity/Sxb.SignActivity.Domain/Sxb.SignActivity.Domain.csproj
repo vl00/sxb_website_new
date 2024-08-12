@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AggregatesModel\UserAggregate\**" />
+    <EmbeddedResource Remove="AggregatesModel\UserAggregate\**" />
+    <None Remove="AggregatesModel\UserAggregate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Sxb.Domain.Abstractions\Sxb.Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\Sxb.SignActivity.Common\Sxb.SignActivity.Common.csproj" />
+  </ItemGroup>
+
+</Project>

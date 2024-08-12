@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script src="./js/config.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>
+            <input type="radio" id="radio_school" value="1" v-model.number="featureType" />
+            <label for="radio_school">学校</label>
+            <input type="radio" id="radio_schoolFilter" value="3" v-model.number="featureType" />
+            <label for="radio_schoolFilter">学校筛选器</label>
+            <input type="radio" id="radio_article" value="2" v-model.number="featureType" />
+            <label for="radio_article">文章</label>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>别称</th>
+                    <th>分值</th>
+                    <th>权重</th>
+                    <th>类型</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(feature,index)  in features" v-on:click="selectFeature(index)">
+                    <td>{{feature.id}}</td>
+                    <td>{{feature.alias}}</td>
+                    <td>{{feature.score}}</td>
+                    <td>{{feature.weight}}</td>
+                    <td v-if="feature.type == 1">学校</td>
+                    <td v-else-if="feature.type == 2">文章</td>
+                    <td v-else-if="feature.type == 3">学校筛选器</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <form>
+            <label>ID</label>
+            <input type="text"  v-model="edit.id" disabled />
+            <label>别称</label>
+            <input type="text" v-model="edit.alias" disabled />
+            <label>分值</label>
+            <input type="number" v-model.number="edit.score" value="" />
+            <label>权重</label>
+            <input type="number"v-model.number="edit.weight" value="" />
+            <input type="button"  value="保存" v-on:click="editFeature" />
+        </form>
+          
+
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            created: function () {
+                this.debouncedLoadFeatures = _.debounce(this.loadFeatures, 500)
+            },
+            mounted: function () {
+                this.debouncedLoadFeatures();
+            },
+            data: {
+                featureType: 1,
+                edit: {},
+                features: []
+            },
+            methods: {
+                selectFeature: function (index) {
+                    this.edit = this.features[index];
+                },
+                editFeature: function () {
+                    if (!confirm('是否确认修改？(ps:修改意味着当前类型对应已跑出的分数结果同时被删除，即会降低前端接口的响应速度。开发阶段忽视。)')) {
+                        return;
+                    }
+                    $.ajax({
+                        type: 'post',
+                        url: config.host + '/api/MapFeature',
+                        data: JSON.stringify(this.edit),
+                        contentType: 'application/json',
+                        success: function (data) {
+                            alert(data.msg)
+                        }
+                    });
+                },
+                loadFeatures: function () {
+                    var _this = this;
+                    $.get(config.host +  '/api/MapFeature?type=' + _this.featureType, function (data) {
+                        _this.features = data.data;
+                        _this.edit = _this.features[0];
+                    });
+                }
+            },
+            watch: {
+                featureType: function (newval, oldval) {
+                    this.debouncedLoadFeatures()
+                }
+            }
+        })
+    </script>
+</body>
+</html>

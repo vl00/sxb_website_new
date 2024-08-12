@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-customerservice-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-customerservice-api-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-customerservice-api-dev
+  template:
+    metadata:
+      labels:
+        app: sxb-customerservice-api-dev
+    spec:
+      volumes:
+        - name: appsettings
+          configMap:
+            name: sxb-customerservice-api-dev-config
+            defaultMode: 420
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+      containers:
+        - name: sxb-customerservice-api-dev
+          image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-customerservice-api:dev"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - name: appsettings
+              mountPath: /app/appsettings.Development.json
+              subPath: appsettings.Development.json
+            - name: host-time
+              readOnly: true
+              mountPath: /etc/localtime
+      terminationGracePeriodSeconds: 10
+      restartPolicy: Always
+--- 
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: sxb-customerservice-api-dev
+  namespace: sxb
+  labels:
+    HealthChecks: 'true'
+    app: sxb-customerservice-api-dev
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31322
+  selector:
+    app: sxb-customerservice-api-dev
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster

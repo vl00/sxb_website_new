@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net5.0\Data\1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net5.0\Data\articles_Development.csv" />
+    <None Include="bin\Debug\net5.0\Data\articles_timelog_Development.log" />
+    <None Include="bin\Debug\net5.0\Data\schools_Development.csv" />
+    <None Include="bin\Debug\net5.0\Data\schools_Development.log" />
+    <None Include="bin\Debug\net5.0\Data\schools_synclog_Development.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sxb.Recommend.Application\Sxb.Recommend.Application.csproj" />
+    <ProjectReference Include="..\Sxb.Recommend.Domain\Sxb.Recommend.Domain.csproj" />
+    <ProjectReference Include="..\Sxb.Recommend.Infrastructure\Sxb.Recommend.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.Staging.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

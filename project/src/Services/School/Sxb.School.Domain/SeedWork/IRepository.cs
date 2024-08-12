@@ -1,0 +1,9 @@
+﻿using Sxb.Domain;
+
+namespace Sxb.School.Domain.SeedWork
+{
+    public interface IRepository<T> where T : IAggregateRoot
+    {
+        IUnitOfWork UnitOfWork { get; }
+    }
+}

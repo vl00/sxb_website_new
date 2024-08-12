@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Sxb.ArticleMajor.Runner": {
+      "commandName": "Project"
+    },
+    "Production": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Production": "true"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-recommend-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-recommend-api-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-recommend-api-dev
+  template:
+    metadata:
+      labels:
+        app: sxb-recommend-api-dev
+    spec:
+      volumes:
+        - name: sxbrecommend-appdata
+          persistentVolumeClaim:
+            claimName: sxbrecommend-appdata
+
+      containers:
+      - name: sxb-recommend-api-dev
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-recommend-api:dev"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+        volumeMounts:
+          - name: sxbrecommend-appdata
+            mountPath: /app/Data
+      terminationGracePeriodSeconds: 10
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-recommend-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-recommend-api-dev
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-recommend-api-dev

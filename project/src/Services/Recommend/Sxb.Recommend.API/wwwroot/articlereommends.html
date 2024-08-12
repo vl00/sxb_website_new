@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.js"></script>
+    <script src="./js/config.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <label>文章A</label>
+            <input type="text" name="name" placeholder="请填入文章A的ID" v-model="articleAID" v-on:change="getRecommend" />
+            <button v-on:click="getRecommend">刷新</button>
+            <input id="listNodelCB" type="checkbox" v-model="showModel" value="true" />
+            <label for="listNodelCB">列表模式</label>
+            <p>{{message}}</p>
+            <table border="1" v-if="!showModel">
+                <thead>
+                    <tr>
+                        <th colspan="7">文章A</th>
+                        <th colspan="7">文章B</th>
+                        <th rowspan="2">推荐分值</th>
+                        <th rowspan="2">加分明细</th>
+                    </tr>
+                    <tr>
+                        <!--文章A-->
+                        <th>文章ID</th>
+                        <th>文章类型</th>
+                        <th>发布时间</th>
+                        <th>标签</th>
+                        <th>关联学校</th>
+                        <th>投放地区（省、市、区）</th>
+                        <th>文章分类</th>
+                        <!--文章B-->
+                        <th>文章ID</th>
+                        <th>文章类型</th>
+                        <th>发布时间</th>
+                        <th>标签</th>
+                        <th>关联学校</th>
+                        <th>投放地区（省、市、区）</th>
+                        <th>文章分类</th>
+                        <!--留白-->
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="articleMap in articleMaps" row>
+                        <!--文章A-->
+                        <td>{{articleMap.articleP.id}}</td>
+                        <td>{{articleMap.articleP.type}}</td>
+                        <td>{{articleMap.articleP.time}}</td>
+                        <td>{{articleMap.articleP.tags}}</td>
+                        <td>{{articleMap.articleP.schools}}</td>
+                        <td>{{articleMap.articleP.deployAreaInfos}}</td>
+                        <td>{{articleMap.articleP.schoolTypes}}</td>
+                        <!--文章B-->
+                        <td>{{articleMap.articleS.id}}</td>
+                        <td>{{articleMap.articleS.type}}</td>
+                        <td>{{articleMap.articleS.time}}</td>
+                        <td>{{articleMap.articleS.tags}}</td>
+                        <td>{{articleMap.articleS.schools}}</td>
+                        <td>{{articleMap.articleS.deployAreaInfos}}</td>
+                        <td>{{articleMap.articleS.schoolTypes}}</td>
+                        <!--推荐分值-->
+                        <td>{{articleMap.score}}</td>
+                        <!--加分明细-->
+                        <td>{{articleMap.remark}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul v-else>
+                <li v-for="articleMap in articleMaps">
+                    {{articleMap.articleS.detail.title}}
+                    <span style="color:green;"> 推荐分值：{{articleMap.score}}</span>
+                    <span style="color:blue;">加分明细：{{articleMap.remark}}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mounted: function () {
+
+            },
+            data: {
+                message: '',
+                articleMaps: [],
+                articleAID: 'a7ef439e-995c-4f07-ade1-a172d6cc0386',
+                showModel: false,
+            },
+            methods: {
+                getRecommend: function (e) {
+                    var _this = this;
+                    _this.message = '请求中，请稍等....'
+                    $.get(config.host + '/api/recommend/GetArticles/AId?AId=' + _this.articleAID + '&offset=0&limit=100000', function (data) {
+                        _(data.data).forEach((value, index) => {
+                            _this.getArticles(value).then((res) => {
+                                if (res.succeed) {
+                                    value.articleS.detail = res.data
+                                } else {
+                                    value.articleS.detail = {
+                                        title: "暂未找到（有可能下架了。）"
+                                    }
+                                }
+                                if (index == data.data.length - 1) {
+                                    _this.articleMaps = data.data;
+                                    _this.message = '完成!'
+                                }
+                            });
+                        })
+                    });
+                }
+                ,getArticles: function (articleMap) {
+                    return new Promise((resolver, reject) => {
+                        $.ajax({
+                            type: 'get',
+                            url: 'https://m.sxkid.com/api/article/get',
+                            contentType: 'application/json',
+                            data: { id: articleMap.articleS.id },
+                            success: function (res) {
+                                resolver(res)
+                            }
+                        })
+                    });
+
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

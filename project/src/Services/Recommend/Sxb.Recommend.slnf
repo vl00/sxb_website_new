@@ -1,0 +1,19 @@
+{
+  "solution": {
+    "path": "..\\..\\..\\Sxb.Product.sln",
+    "projects": [
+      "src\\ApiGateways\\Sxb.ApiGateway\\Sxb.ApiGateway.csproj",
+      "src\\Services\\Recommend\\Sxb.Recommend.API\\Sxb.Recommend.API.csproj",
+      "src\\Services\\Recommend\\Sxb.Recommend.Application\\Sxb.Recommend.Application.csproj",
+      "src\\Services\\Recommend\\Sxb.Recommend.Assist\\Sxb.Recommend.Assist.csproj",
+      "src\\Services\\Recommend\\Sxb.Recommend.Domain\\Sxb.Recommend.Domain.csproj",
+      "src\\Services\\Recommend\\Sxb.Recommend.Infrastructure\\Sxb.Recommend.Infrastructure.csproj",
+      "src\\Services\\Recommend\\Test\\Sxb.Recommend.Test\\Sxb.Recommend.Test.csproj",
+      "src\\Shared\\Sxb.Domain.Abstractions\\Sxb.Domain.Abstractions.csproj",
+      "src\\Shared\\Sxb.Infrastructure.Core\\Sxb.Infrastructure.Core.csproj",
+      "src\\Tools\\Sxb.Framework.AspNetCoreHelper\\Sxb.Framework.AspNetCoreHelper.csproj",
+      "src\\Tools\\Sxb.Framework.Cache.Redis\\src\\Sxb.Framework.Cache.Redis.csproj",
+      "src\\Tools\\Sxb.Framework.Foundation\\Sxb.Framework.Foundation.csproj"
+    ]
+  }
+}

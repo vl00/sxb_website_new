@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Sxb.WenDa.Runner": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    },
+    "Production": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Production": "true"
+      }
+    }
+  }
+}

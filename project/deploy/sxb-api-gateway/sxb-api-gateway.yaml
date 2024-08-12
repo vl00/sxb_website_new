@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-api-gateway
+  namespace: sxb
+  labels:
+    app: sxb-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-api-gateway
+  template:
+    metadata:
+      labels:
+        app: sxb-api-gateway
+    spec:
+      containers:
+      - name: sxb-api-gateway
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-api-gateway:dev"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/app/appsettings.json"
+            name: appsettings
+            subPath: appsettings.json
+          - mountPath: "/app/ocelot.json"
+            name: appsettings
+            subPath: ocelot.json
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_HOSTINGSTARTUPASSEMBLIES
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_hostingStartup
+          - name: SkyWalking__Transport__gRPC__Servers
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_servers
+          - name: USE_Forwarded_Headers
+            value: "false"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 2048Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: appsettings
+          configMap:
+              name: sxb-api-gateway-config
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-api-gateway
+  namespace: sxb
+  labels:
+    app: sxb-api-gateway
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: sxb-api-gateway

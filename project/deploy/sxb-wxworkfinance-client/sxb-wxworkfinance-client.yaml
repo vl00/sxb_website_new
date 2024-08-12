@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-wxworkfinance-client
+  namespace: sxb
+  labels:
+    app: sxb-wxworkfinance-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-wxworkfinance-client
+  template:
+    metadata:
+      labels:
+        app: sxb-wxworkfinance-client
+    spec:
+      containers:
+      - name: sxb-wxworkfinance-client
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-wxworkfinance-client:latest"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/app/appsettings.json"
+            name: appsettings
+            subPath: appsettings.json
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_HOSTINGSTARTUPASSEMBLIES
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_hostingStartup
+          - name: SkyWalking__Transport__gRPC__Servers
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_servers
+          - name: USE_Forwarded_Headers
+            value: "true"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Production"
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 2
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 80
+          periodSeconds: 3
+          successThreshold: 2
+          timeoutSeconds: 2
+          failureThreshold: 3
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: appsettings
+          configMap:
+              name: sxb-wxworkfinance-client-config
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-wxworkfinance-client
+  namespace: sxb
+  labels:
+    app: sxb-wxworkfinance-client
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-wxworkfinance-client

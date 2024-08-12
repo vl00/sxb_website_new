@@ -1,0 +1,89 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fluentd
+  namespace: logging
+  labels:
+    app: fluentd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fluentd
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fluentd
+    spec:
+      volumes:
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+        - name: fluentd-config
+          configMap:
+            name: fluentd-config
+            defaultMode: 420
+        - name: containers-logs
+          hostPath:
+            path: /var/log
+            type: DirectoryOrCreate
+        - name: docker-logs
+          hostPath:
+            path: /var/lib/docker/containers
+            type: ''
+      containers:
+        - name: fluentd
+          image: 'witskeeper/fluentd-es:68'
+          ports:
+            - name: tcp-24224
+              containerPort: 24224
+              protocol: TCP
+            - name: tcp-5140
+              containerPort: 5140
+              protocol: TCP
+          env:
+            - name: discovery.type
+              value: single-node
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              memory: 512Mi
+          volumeMounts:
+            - name: host-time
+              readOnly: true
+              mountPath: /etc/localtime
+            - name: fluentd-config
+              mountPath: /fluentd/etc/fluent.conf
+              subPath: fluent.conf
+            - name: containers-logs
+              mountPath: /var/log
+            - name: docker-logs
+              mountPath: /var/lib/docker/containers
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+
+--- 
+
+  
+kind: Service
+apiVersion: v1
+metadata:
+  name: fluentd
+  namespace: logging
+  labels:
+    tag: fluentd
+spec:
+  ports:
+    - protocol: TCP
+      port: 24224
+      targetPort: 24224
+      nodePort: 30011
+  selector:
+    app: fluentd
+  type: NodePort

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Kogel.Dapper.Extension" Version="3.2.2.4" />
+    <PackageReference Include="Kogel.Dapper.Extension.Mssql" Version="3.2.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.Foundation\Sxb.Framework.Foundation.csproj" />
+    <ProjectReference Include="..\Sxb.User.Common\Sxb.User.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Sxb.Recommend.Assist": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SxbRecommend_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

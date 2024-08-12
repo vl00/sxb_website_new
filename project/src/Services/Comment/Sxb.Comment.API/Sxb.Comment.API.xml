@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sxb.Comment.API</name>
+    </assembly>
+    <members>
+        <member name="T:Sxb.Comment.API.Controllers.QuestionController">
+            <summary>
+            问答相关API
+            </summary>
+        </member>
+        <member name="M:Sxb.Comment.API.Controllers.QuestionController.#ctor(Sxb.Comment.API.Application.Query.IQuestionQuery)">
+            <summary>
+            问答相关API
+            </summary>
+            <param name="questionQuery"></param>
+        </member>
+        <member name="M:Sxb.Comment.API.Controllers.QuestionController.Get(System.Guid,System.Guid,System.Int32)">
+            <summary>
+            获取精选问答
+            </summary>
+            <param name="eid">学部ID</param>
+            <param name="userID">用户ID</param>
+            <param name="take">获取条数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sxb.Comment.API.Controllers.QuestionController.ListQuestionTotals(Sxb.Comment.API.RequestContract.Question.ListQuestionTotalsRequest)">
+            <summary>
+            获取问答统计
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Sxb.Comment.API.RequestContract.Question.ListQuestionTotalsRequest.EID">
+            <summary>
+            学部ID
+            </summary>
+        </member>
+        <member name="M:Sxb.Comment.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>

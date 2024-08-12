@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-static-api
+  namespace: sxb
+  labels:
+    app: sxb-static-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-static-api
+  template:
+    metadata:
+      labels:
+        app: sxb-static-api
+    spec:
+      containers:
+      - name: sxb-static-api
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-static-api"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Production"
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      terminationGracePeriodSeconds: 10
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-static-api
+  namespace: sxb
+  labels:
+    app: sxb-static-api
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-static-api

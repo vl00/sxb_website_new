@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Sxb.Domain.Abstractions\Sxb.Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Sxb.Infrastructure.Core\Sxb.Infrastructure.Core.csproj" />
+  </ItemGroup>
+
+</Project>

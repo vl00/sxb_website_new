@@ -1,0 +1,107 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8FD407FC-5522-4862-91D3-BB4FDD1BFD7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{2E684A91-8AFA-45A9-BBF9-56357A9B09B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redis", "Redis", "{66E679A6-C274-487D-924C-7E1CDBB28A18}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sxb.Framework.Cache.Redis", "src\Tools\Sxb.Framework.Cache.Redis\src\Sxb.Framework.Cache.Redis.csproj", "{193304F3-701E-49BD-9875-4879CC93270E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sxb.Framework.Cache.RedisProfiler", "src\Tools\Sxb.Framework.Cache.Redis\Sxb.Framework.Cache.RedisProfiler\Sxb.Framework.Cache.RedisProfiler.csproj", "{710787FE-C094-4D36-8DE0-346653976C36}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sxb.Framework.Foundation", "src\Tools\Sxb.Framework.Foundation\Sxb.Framework.Foundation.csproj", "{9448B117-3033-4FC7-9F35-C7C1F9323BE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sxb.Framework.AspNetCoreHelper", "src\Tools\Sxb.Framework.AspNetCoreHelper\Sxb.Framework.AspNetCoreHelper.csproj", "{C988B632-AA21-4FB5-8F4E-EA1CC8024A70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Comment.API", "src\Services\Comment\Sxb.Comment.API\Sxb.Comment.API.csproj", "{3F715E5A-63F3-4B10-B23A-4A98BBCEBC38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Comment.Application", "src\Services\Comment\Sxb.Comment.Application\Sxb.Comment.Application.csproj", "{38D3095D-21EE-4C2F-909D-12BD03261CC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Comment.Domain", "src\Services\Comment\Sxb.Comment.Domain\Sxb.Comment.Domain.csproj", "{4B9EEEB7-3723-4994-B050-90F658428AFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Comment.Infrastructure", "src\Services\Comment\Sxb.Comment.Infrastructure\Sxb.Comment.Infrastructure.csproj", "{DF28F5AF-069D-4286-B51B-688497514857}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Comment.Query.SQL", "src\Services\Comment\Sxb.Comment.Query.SQL\Sxb.Comment.Query.SQL.csproj", "{F05BEF59-AB36-4B78-A844-0E8B1D3FFBAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A862C491-D131-49C8-ADB7-D307ABBB1CC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Domain.Abstractions", "src\Shared\Sxb.Domain.Abstractions\Sxb.Domain.Abstractions.csproj", "{38B17D1E-E223-4E71-9C5B-75415545AC00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sxb.Infrastructure.Core", "src\Shared\Sxb.Infrastructure.Core\Sxb.Infrastructure.Core.csproj", "{4364F076-D1F4-43EE-99FB-9AFEBBD52B7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{193304F3-701E-49BD-9875-4879CC93270E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{193304F3-701E-49BD-9875-4879CC93270E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{193304F3-701E-49BD-9875-4879CC93270E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{193304F3-701E-49BD-9875-4879CC93270E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710787FE-C094-4D36-8DE0-346653976C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710787FE-C094-4D36-8DE0-346653976C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710787FE-C094-4D36-8DE0-346653976C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710787FE-C094-4D36-8DE0-346653976C36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9448B117-3033-4FC7-9F35-C7C1F9323BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9448B117-3033-4FC7-9F35-C7C1F9323BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9448B117-3033-4FC7-9F35-C7C1F9323BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9448B117-3033-4FC7-9F35-C7C1F9323BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C988B632-AA21-4FB5-8F4E-EA1CC8024A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C988B632-AA21-4FB5-8F4E-EA1CC8024A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C988B632-AA21-4FB5-8F4E-EA1CC8024A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C988B632-AA21-4FB5-8F4E-EA1CC8024A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F715E5A-63F3-4B10-B23A-4A98BBCEBC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F715E5A-63F3-4B10-B23A-4A98BBCEBC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F715E5A-63F3-4B10-B23A-4A98BBCEBC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F715E5A-63F3-4B10-B23A-4A98BBCEBC38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D3095D-21EE-4C2F-909D-12BD03261CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D3095D-21EE-4C2F-909D-12BD03261CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D3095D-21EE-4C2F-909D-12BD03261CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D3095D-21EE-4C2F-909D-12BD03261CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B9EEEB7-3723-4994-B050-90F658428AFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B9EEEB7-3723-4994-B050-90F658428AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B9EEEB7-3723-4994-B050-90F658428AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B9EEEB7-3723-4994-B050-90F658428AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF28F5AF-069D-4286-B51B-688497514857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF28F5AF-069D-4286-B51B-688497514857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF28F5AF-069D-4286-B51B-688497514857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF28F5AF-069D-4286-B51B-688497514857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05BEF59-AB36-4B78-A844-0E8B1D3FFBAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05BEF59-AB36-4B78-A844-0E8B1D3FFBAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05BEF59-AB36-4B78-A844-0E8B1D3FFBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05BEF59-AB36-4B78-A844-0E8B1D3FFBAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38B17D1E-E223-4E71-9C5B-75415545AC00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38B17D1E-E223-4E71-9C5B-75415545AC00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38B17D1E-E223-4E71-9C5B-75415545AC00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38B17D1E-E223-4E71-9C5B-75415545AC00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4364F076-D1F4-43EE-99FB-9AFEBBD52B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4364F076-D1F4-43EE-99FB-9AFEBBD52B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4364F076-D1F4-43EE-99FB-9AFEBBD52B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4364F076-D1F4-43EE-99FB-9AFEBBD52B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66E679A6-C274-487D-924C-7E1CDBB28A18} = {2E684A91-8AFA-45A9-BBF9-56357A9B09B8}
+		{193304F3-701E-49BD-9875-4879CC93270E} = {66E679A6-C274-487D-924C-7E1CDBB28A18}
+		{710787FE-C094-4D36-8DE0-346653976C36} = {66E679A6-C274-487D-924C-7E1CDBB28A18}
+		{9448B117-3033-4FC7-9F35-C7C1F9323BE7} = {2E684A91-8AFA-45A9-BBF9-56357A9B09B8}
+		{C988B632-AA21-4FB5-8F4E-EA1CC8024A70} = {2E684A91-8AFA-45A9-BBF9-56357A9B09B8}
+		{3F715E5A-63F3-4B10-B23A-4A98BBCEBC38} = {8FD407FC-5522-4862-91D3-BB4FDD1BFD7E}
+		{38D3095D-21EE-4C2F-909D-12BD03261CC0} = {8FD407FC-5522-4862-91D3-BB4FDD1BFD7E}
+		{4B9EEEB7-3723-4994-B050-90F658428AFC} = {8FD407FC-5522-4862-91D3-BB4FDD1BFD7E}
+		{DF28F5AF-069D-4286-B51B-688497514857} = {8FD407FC-5522-4862-91D3-BB4FDD1BFD7E}
+		{F05BEF59-AB36-4B78-A844-0E8B1D3FFBAC} = {8FD407FC-5522-4862-91D3-BB4FDD1BFD7E}
+		{38B17D1E-E223-4E71-9C5B-75415545AC00} = {A862C491-D131-49C8-ADB7-D307ABBB1CC7}
+		{4364F076-D1F4-43EE-99FB-9AFEBBD52B7B} = {A862C491-D131-49C8-ADB7-D307ABBB1CC7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBE8D5AE-D536-42C8-A041-849A41AC0E6E}
+	EndGlobalSection
+EndGlobal

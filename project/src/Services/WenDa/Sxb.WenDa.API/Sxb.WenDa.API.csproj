@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a08e8b54-a7a5-40a9-b926-590257c76127</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+    <!--生成xml给swagger使用-->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" Version="5.0.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="5.0.3" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="5.1.1" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="5.1.4" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="5.1.4" />
+    <PackageReference Include="Exceptionless.AspNetCore" Version="4.6.2" />
+    <PackageReference Include="Exceptionless.Extensions.Logging" Version="4.6.2" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.38.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.15.10" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="4.1.1" />
+    <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
+    <PackageReference Include="Serilog.Sinks.Fluentd" Version="0.4.0" />
+    <PackageReference Include="Serilog.Sinks.Map" Version="1.0.2" />
+    <PackageReference Include="SkyAPM.Agent.AspNetCore" Version="1.3.0" />
+    <PackageReference Include="Sxb.GenerateNo" Version="1.0.8" />
+    <PackageReference Include="TencentCloudSDK" Version="3.0.498" />
+    <PackageReference Include="WeChatSDK" Version="3.1.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.AspNetCoreHelper\Sxb.Framework.AspNetCoreHelper.csproj" />
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.Cache.Redis\src\Sxb.Framework.Cache.Redis.csproj" />
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.Cache.Redis\Sxb.Framework.Cache.RedisProfiler\Sxb.Framework.Cache.RedisProfiler.csproj" />
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.Foundation\Sxb.Framework.Foundation.csproj" />
+    <ProjectReference Include="..\..\..\Tools\Sxb.Framework.HttpContextLog\Sxb.Framework.HttpContextLog.csproj" />
+    <ProjectReference Include="..\Sxb.WenDa.Common\Sxb.WenDa.Common.csproj" />
+    <ProjectReference Include="..\Sxb.WenDa.Domain\Sxb.WenDa.Domain.csproj" />
+    <ProjectReference Include="..\Sxb.WenDa.Infrastructure\Sxb.WenDa.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sxb.WenDa.Query.ElasticSearch\Sxb.WenDa.Query.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Sxb.WenDa.Query.SQL\Sxb.WenDa.Query.SQL.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="shared-auth-ticket-keys\key-704ddf0d-753b-4ea8-a7b7-735fbb9dad3d.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

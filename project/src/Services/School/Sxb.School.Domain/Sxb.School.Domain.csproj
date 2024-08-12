@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Sxb.GenerateNo" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Sxb.Domain.Abstractions\Sxb.Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\Sxb.School.Query.ES\Sxb.School.Query.ES.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-settlement-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-settlement-api-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-settlement-api-dev
+  template:
+    metadata:
+      labels:
+        app: sxb-settlement-api-dev
+    spec:
+      containers:
+      - name: sxb-settlement-api-dev
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-settlement-api:dev"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      terminationGracePeriodSeconds: 10
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-settlement-api-dev
+  namespace: sxb
+  labels:
+    app: sxb-settlement-api-dev
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-settlement-api-dev

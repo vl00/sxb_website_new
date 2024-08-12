@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sxb-wxlive-api
+  namespace: sxb
+  labels:
+    app: sxb-wxlive-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sxb-wxlive-api
+  template:
+    metadata:
+      labels:
+        app: sxb-wxlive-api
+    spec:
+      containers:
+      - name: sxb-wxlive-api
+        image: "registry.cn-shenzhen.aliyuncs.com/sxkid/sxb-wxlive-api:dev"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/app/appsettings.Development.json"
+            name: appsettings
+            subPath: appsettings.Development.json
+          - name: "host-time"
+            readOnly: true
+            mountPath: /etc/localtime
+        ports:
+        - containerPort: 80
+        env:
+          - name: ASPNETCORE_HOSTINGSTARTUPASSEMBLIES
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_hostingStartup
+          - name: SkyWalking__Transport__gRPC__Servers
+            valueFrom:
+              configMapKeyRef:
+                name: sxb-config
+                key: skywalking_servers
+          - name: USE_Forwarded_Headers
+            value: "true"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 2
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 80
+          periodSeconds: 3
+          successThreshold: 2
+          timeoutSeconds: 2
+          failureThreshold: 3
+        resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 1m
+              memory: 50Mi
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: appsettings
+          configMap:
+            name: sxb-wxlive-api-config
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+      restartPolicy: Always
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sxb-wxlive-api
+  namespace: sxb
+  labels:
+    app: sxb-wxlive-api
+    HealthChecks: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: sxb-wxlive-api

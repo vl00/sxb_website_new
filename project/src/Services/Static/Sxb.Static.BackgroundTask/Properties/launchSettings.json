@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Sxb.Static.BackgroundTask": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
